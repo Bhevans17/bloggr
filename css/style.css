@@ -1,0 +1,8 @@
+#update-post,
+#delete-post {
+  cursor: pointer;
+}
+
+.navbar-brand {
+  font-family: "Abril Fatface", cursive;
+}

@@ -1,5 +1,5 @@
 <?php session_start(); ?>
-<?php include "db.php"; ?>
+<?php include "./config/db.php"; ?>
 <?php
 if (!isset($_SESSION["user"])) {
     header("location: index.php");
@@ -13,8 +13,9 @@ if (!isset($_SESSION["user"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link href="style.css" type="text/css" rel="stylesheet">
-    <title>Document</title>
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/logo.png" />
+    <title>Creative Journal | Dashboard</title>
 </head>
 
 <body>
@@ -28,12 +29,6 @@ if (!isset($_SESSION["user"])) {
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a href="dashboard.php" class="nav-link">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="friends.php" class="nav-link">Friends</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="my_posts.php" class="nav-link">My Posts</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logout.php">Logout</a>
@@ -64,15 +59,7 @@ if (!isset($_SESSION["user"])) {
     </div>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-3 text-left">
-                <h3 class="mb-4">Friends List</h3>
-                <ul>
-                    <li>Bob Joe</li>
-                    <li>Bob Joe</li>
-                    <li>Bob Joe</li>
-                </ul>
-            </div>
-            <div class="col-md-6">
+            <div class="col-md-6 offset-md-3">
                 <h3 class="mb-4">Create Post</h3>
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 
@@ -85,14 +72,6 @@ if (!isset($_SESSION["user"])) {
                     <input class="btn btn-success" type="submit">
                 </form>
             </div>
-            <div class="col-md-3 text-right">
-                <h3>Friends List</h3>
-                <ul>
-                    <li>Bob Joe</li>
-                    <li>Bob Joe</li>
-                    <li>Bob Joe</li>
-                </ul>
-            </div>
         </div>
     </div>
 
@@ -100,6 +79,13 @@ if (!isset($_SESSION["user"])) {
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <h3 class="mb-4">My Recent Posts</h3>
+                <!--  <form class="my-3">
+                   
+                    <div class="input-group">
+                        <input class="form-control" type="search" placeholder="Search posts" aria-label="Search">
+                    </div>
+  
+                </form>  -->
             </div>
             <div class="col-md-6 offset-md-3">
                 <div class="list-group">
@@ -115,17 +101,20 @@ if (!isset($_SESSION["user"])) {
                         echo "<small>{$post['created_at']}</small>";
                         echo "</div>";
                         echo "<p class='mb-1'>{$post['post_desc']}</p>";
+                        /*
                         echo "<div class='d-flex justify-content-between mt-5'>";
-                        echo "<a id='update-post' class='text-primary' data-toggle='modal' data-target='#exampleModal'>Update</a>";
+                        echo "<a id='update-post' class='text-primary' data-toggle='modal' data-target='#updateModel'>Update</a>";
                         echo "<a id='delete-post' class='text-danger' data-toggle='modal' data-target='#deleteModal'>Delete Post</a>";
                         echo "</div>";
+                        */
                         echo "</div>";
                         // Update Modal
-                        echo "<div class='modal fade' id='exampleModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                        /*
+                        echo "<div class='modal fade' id='updateModel' tabindex='-1' role='dialog' aria-labelledby='updateModel' aria-hidden='true'>
                                 <div class='modal-dialog'>
                                     <div class='modal-content'>
                                     <div class='modal-header'>
-                                        <h5 class='modal-title' id='exampleModalLabel'>Update Post</h5>
+                                        <h5 class='modal-title' id='updateModelTitle'>Update Post</h5>
                                         <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
                                         <span aria-hidden='true'>&times;</span>
                                         </button>
@@ -133,10 +122,10 @@ if (!isset($_SESSION["user"])) {
                                     <div class='modal-body'>
                                         <form>
                                             <div class='form-group'>
-                                                <input class='form-control' id='update_post_title' name='update_post_title' type='text' placeholder='Update Post Title'>
+                                                <input class='form-control' id='update_post_title' name='update_post_title' type='text' placeholder='Update title'>
                                             </div>
                                             <div class='form-group'>
-                                                <textarea class='form-control' id='update_post_desc' name='update_post_desc' cols='30' rows='5' placeholder='Update Post Description'></textarea>
+                                                <textarea class='form-control' id='update_post_desc' name='update_post_desc' cols='30' rows='5' placeholder='Update description'></textarea>
                                             </div>
                                             <button type='submit' class='btn btn-primary'>Update</button>
                                         </form>
@@ -144,23 +133,26 @@ if (!isset($_SESSION["user"])) {
                                     </div>
                                     </div>
                                 </div>";
+                                */
                         // Delete Modal
-                        echo "<div class='modal fade' id='deleteModal' tabindex='-1' role='dialog' aria-labelledby='deleteModalLabel' aria-hidden='true'>
+                        /*
+                        echo "<div class='modal fade' id='deleteModal' tabindex='-1' role='dialog' aria-labelledby='deleteModal' aria-hidden='true'>
                             <div class='modal-dialog'>
                                 <div class='modal-content'>
                                 <div class='modal-header'>
-                                    <h5 class='modal-title' id='deleteModalLabel'>Delete Post</h5>
+                                    <h5 class='modal-title' id='deleteModalTitle'>Delete Post</h5>
                                     <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
                                     <span aria-hidden='true'>&times;</span>
                                     </button>
                                 </div>
-                                <div class='modal-footer'>
+                                <div class='modal-footer d-flex justify-content-start'>
                                     <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
                                     <button type='button' class='btn btn-danger'>Delete</button>
                                 </div>
                                 </div>
                             </div>
                         </div>";
+                        */
                     }
                     ?>
                 </div>
@@ -168,15 +160,10 @@ if (!isset($_SESSION["user"])) {
 
         </div>
     </div>
-    <div class="container-fluid bg-dark text-white m-0 p-0 mt-5 bottom-sticky">
-        <div class="container py-3">
-            <p class="m-0">Copyright &copy; 2020.</p>
-        </div>
-    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <script src="dashboard.js"></script>
+    <script src="./js/dashboard.js"></script>
 </body>
 
 </html>
