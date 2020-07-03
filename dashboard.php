@@ -79,13 +79,13 @@ if (!isset($_SESSION["user"])) {
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <h3 class="mb-4">My Recent Posts</h3>
-                <!--  <form class="my-3">
-                   
+                <form class="my-3">
+
                     <div class="input-group">
                         <input class="form-control" type="search" placeholder="Search posts" aria-label="Search">
                     </div>
-  
-                </form>  -->
+
+                </form>
             </div>
             <div class="col-md-6 offset-md-3">
                 <div class="list-group">
@@ -101,15 +101,15 @@ if (!isset($_SESSION["user"])) {
                         echo "<small>{$post['created_at']}</small>";
                         echo "</div>";
                         echo "<p class='mb-1'>{$post['post_desc']}</p>";
-                        /*
+
                         echo "<div class='d-flex justify-content-between mt-5'>";
                         echo "<a id='update-post' class='text-primary' data-toggle='modal' data-target='#updateModel'>Update</a>";
                         echo "<a id='delete-post' class='text-danger' data-toggle='modal' data-target='#deleteModal'>Delete Post</a>";
                         echo "</div>";
-                        */
+
                         echo "</div>";
                         // Update Modal
-                        /*
+
                         echo "<div class='modal fade' id='updateModel' tabindex='-1' role='dialog' aria-labelledby='updateModel' aria-hidden='true'>
                                 <div class='modal-dialog'>
                                     <div class='modal-content'>
@@ -133,9 +133,9 @@ if (!isset($_SESSION["user"])) {
                                     </div>
                                     </div>
                                 </div>";
-                                */
+
                         // Delete Modal
-                        /*
+
                         echo "<div class='modal fade' id='deleteModal' tabindex='-1' role='dialog' aria-labelledby='deleteModal' aria-hidden='true'>
                             <div class='modal-dialog'>
                                 <div class='modal-content'>
@@ -152,7 +152,6 @@ if (!isset($_SESSION["user"])) {
                                 </div>
                             </div>
                         </div>";
-                        */
                     }
                     ?>
                 </div>

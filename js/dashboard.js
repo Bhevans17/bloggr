@@ -1,7 +1,8 @@
 let postCreated = document.getElementById("post-created");
 
-if (postCrated) {
+if (postCreated) {
   setTimeout(function () {
     postCreated.style.color = "blue";
   }, 3000);
 }
+z;
